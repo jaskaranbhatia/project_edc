@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import './page_search.dart';
 import 'package:flutter_ui_collections/utils/utils.dart';
 import 'package:flutter_ui_collections/widgets/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'page_forgotpass.dart';
 import 'page_home.dart';
@@ -14,6 +16,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final GlobalKey<FormState> _Formkey = GlobalKey<FormState>();
   TextEditingController _emailController = new TextEditingController();
   TextEditingController _passwordController = new TextEditingController();
   FocusNode _emailFocusNode = new FocusNode();
@@ -219,6 +222,30 @@ class _LoginPageState extends State<LoginPage> {
               ],
             )),
       );
+
+
+  Future<void> signIn() async{
+    final formState = _Formkey.currentState;
+    if(formState.validate()){
+      formState.save();
+      try {
+        AuthResult user = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: _email, password: _password);
+        Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage()));
+      }catch(e){
+
+        print(e.message);
+      }
+
+
+
+
+    }
+  }
+
+
+
+
 }
 
 
