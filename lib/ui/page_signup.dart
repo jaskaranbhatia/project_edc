@@ -56,7 +56,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ],
                   ),
                   SizedBox(height: size.getWidthPx(10)),
-                  _textAccount(),
+
                   SizedBox(height: size.getWidthPx(30)),
                   registerFields()
                 ]),
@@ -66,24 +66,24 @@ class _SignUpPageState extends State<SignUpPage> {
     ]));
   }
 
-  RichText _textAccount() {
-    return RichText(
-      text: TextSpan(
-          text: "Hae you registed already? ",
-          children: [
-            TextSpan(
-              style: TextStyle(color: Colors.deepOrange),
-              text: 'Login here',
-              recognizer: TapGestureRecognizer()
-                ..onTap = () => Navigator.pop(context),
-            )
-          ],
-          style: TextStyle(fontFamily: 'Exo2',color: Colors.black87, fontSize: 16)),
-    );
-  }
+//  RichText _textAccount() {
+//    return RichText(
+//      text: TextSpan(
+//          text: "Hae you registed already? ",
+//          children: [
+//            TextSpan(
+//              style: TextStyle(color: Colors.deepOrange),
+//              text: 'Login here',
+//              recognizer: TapGestureRecognizer()
+//                ..onTap = () => Navigator.pop(context),
+//            )
+//          ],
+//          style: TextStyle(fontFamily: 'Exo2',color: Colors.black87, fontSize: 16)),
+//    );
+//  }
 
   GradientText _signUpGradientText() {
-    return GradientText('Register',
+    return GradientText('Login as Teacher',
         gradient: LinearGradient(colors: [
           Color.fromRGBO(97, 6, 165, 1.0),
           Color.fromRGBO(45, 160, 240, 1.0)
@@ -91,28 +91,28 @@ class _SignUpPageState extends State<SignUpPage> {
         style: TextStyle(fontFamily: 'Exo2',fontSize: 36, fontWeight: FontWeight.bold));
   }
 
-  BoxField _nameWidget() {
-    return BoxField(
-        controller: _nameController,
-        focusNode: _nameFocusNode,
-        hintText: "Enter Name",
-        lableText: "Name",
-        obscureText: false,
-        onSaved: (String val) {
-          _name = val;
-        },
-        onFieldSubmitted: (String value) {
-          FocusScope.of(context).requestFocus(_emailFocusNode);
-        },
-        icon: Icons.person,
-        iconColor: colorCurve);
-  }
+//  BoxField _nameWidget() {
+//    return BoxField(
+//        controller: _nameController,
+//        focusNode: _nameFocusNode,
+//        hintText: "Enter Name",
+//        lableText: "Name",
+//        obscureText: false,
+//        onSaved: (String val) {
+//          _name = val;
+//        },
+//        onFieldSubmitted: (String value) {
+//          FocusScope.of(context).requestFocus(_emailFocusNode);
+//        },
+//        icon: Icons.person,
+//        iconColor: colorCurve);
+//  }
 
   BoxField _emailWidget() {
     return BoxField(
         controller: _emailController,
         focusNode: _emailFocusNode,
-        hintText: "Enter email",
+        hintText: "Enter Teacher ID",
         lableText: "Email",
         obscureText: false,
         onSaved: (String val) {
@@ -139,20 +139,21 @@ class _SignUpPageState extends State<SignUpPage> {
         iconColor: colorCurve);
   }
 
-  BoxField _confirmPasswordWidget() {
-    return BoxField(
-        controller: _confirmPasswordController,
-        focusNode: _confirmPassFocusNode,
-        hintText: "Enter Confirm Password",
-        lableText: "Confirm Password",
-        obscureText: true,
-        icon: Icons.lock_outline,
-        onSaved: (String val) {
-          _confirmPassword = val;
-        },
-        iconColor: colorCurve);
-  }
 
+//  BoxField _confirmPasswordWidget() {
+//    return BoxField(
+//        controller: _confirmPasswordController,
+//        focusNode: _confirmPassFocusNode,
+//        hintText: "Enter Confirm Password",
+//        lableText: "Confirm Password",
+//        obscureText: true,
+//        icon: Icons.lock_outline,
+//        onSaved: (String val) {
+//          _confirmPassword = val;
+//        },
+//        iconColor: colorCurve);
+//  }
+//
   Container _signUpButtonWidget() {
     return Container(
       padding: EdgeInsets.symmetric(
@@ -164,7 +165,7 @@ class _SignUpPageState extends State<SignUpPage> {
             borderRadius:  BorderRadius.circular(30.0)),
         padding: EdgeInsets.all(size.getWidthPx(12)),
         child: Text(
-          "Sign Up",
+          "LOGIN",
           style: TextStyle(fontFamily: 'Exo2',color: Colors.white, fontSize: 20.0),
         ),
         color: colorCurve,
@@ -193,10 +194,11 @@ class _SignUpPageState extends State<SignUpPage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                _nameWidget(),
                 _emailWidget(),
                 _passwordWidget(),
-                _confirmPasswordWidget(),
+                SizedBox(
+                  height: 20,
+                ),
                 _signUpButtonWidget(),
               ],
             )),

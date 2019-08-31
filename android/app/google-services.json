@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "873173682701",
-    "firebase_url": "https://flutterapp-3b567.firebaseio.com",
-    "project_id": "flutterapp-3b567",
-    "storage_bucket": "flutterapp-3b567.appspot.com"
+    "project_number": "711207546147",
+    "firebase_url": "https://baby-names-app-db-2dbc0.firebaseio.com",
+    "project_id": "baby-names-app-db-2dbc0",
+    "storage_bucket": "baby-names-app-db-2dbc0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:873173682701:android:d787a59f7572dec0",
+        "mobilesdk_app_id": "1:711207546147:android:4d0e06ed365ddc09",
         "android_client_info": {
-          "package_name": "com.example.flutter_a"
+          "package_name": "com.harshbhavsar.flutter_ui_collections"
         }
       },
       "oauth_client": [
         {
-          "client_id": "873173682701-661od2sim7aobg12ihaiv3ukiojedu55.apps.googleusercontent.com",
+          "client_id": "711207546147-be51um215pqgsdhkjc9aldddr5dv49i9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD5bXw1_-lMzBeI7l0DJ5hV31A0zwG5XD8"
+          "current_key": "AIzaSyBwIwiQW0jSCEGGkAMiVzF3xA8e5XBcHJY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "873173682701-661od2sim7aobg12ihaiv3ukiojedu55.apps.googleusercontent.com",
+              "client_id": "711207546147-be51um215pqgsdhkjc9aldddr5dv49i9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

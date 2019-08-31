@@ -83,21 +83,25 @@ class _LoginPageState extends State<LoginPage> {
   RichText _textAccount() {
     return RichText(
       text: TextSpan(
-          text: "Don't have an account? ",
+
+          text: "For Teacher Account ",
           children: [
             TextSpan(
-              style: TextStyle(color: Colors.deepOrange),
-              text: 'Create your account.',
+              style: TextStyle(color: Colors.deepOrange,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
+              text: 'CLICK HERE.\n',
               recognizer: TapGestureRecognizer()
                 ..onTap = () =>  Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage())),
             )
           ],
-          style: TextStyle(color: Colors.black87, fontSize: 14, fontFamily: 'Exo2')),
+          style: TextStyle(
+              color: Colors.black87, fontSize: 20, fontFamily: 'Exo2')),
     );
   }
 
   GradientText _loginGradientText() {
-    return GradientText('Login',
+    return GradientText('Login as Student',
         gradient: LinearGradient(colors: [
           Color.fromRGBO(97, 6, 165, 1.0),
           Color.fromRGBO(45, 160, 240, 1.0)
@@ -109,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
     return BoxField(
         controller: _emailController,
         focusNode: _emailFocusNode,
-        hintText: "Enter email",
+        hintText: "Enter Roll No",
         lableText: "Email",
         obscureText: false,
         onSaved: (String val) {
@@ -118,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
         onFieldSubmitted: (String value) {
           FocusScope.of(context).requestFocus(_passFocusNode);
         },
-        icon: Icons.email,
+        icon: Icons.person,
         iconColor: colorCurve);
   }
 
@@ -152,26 +156,29 @@ class _LoginPageState extends State<LoginPage> {
         ),
         color: colorCurve,
         onPressed: () {
+          signIn();
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomePage()));
           // Going to DashBoard
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+
         },
       ),
     );
   }
 
-  Row _socialButtons() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-
-        socialCircleAvatar("assets/icons/icnfb.png",(){}),
-        SizedBox(width: size.getWidthPx(18)),
-        socialCircleAvatar("assets/icons/icn_twitter.png",(){}),
-        SizedBox(width: size.getWidthPx(18)),
-        socialCircleAvatar("assets/icons/icngmail.png",(){}),
-      ],
-    );
-  }
+//  Row _socialButtons() {
+//    return Row(
+//      mainAxisAlignment: MainAxisAlignment.center,
+//      children: <Widget>[
+//
+//        socialCircleAvatar("assets/icons/icnfb.png",(){}),
+//        SizedBox(width: size.getWidthPx(18)),
+//        socialCircleAvatar("assets/icons/icn_twitter.png",(){}),
+//        SizedBox(width: size.getWidthPx(18)),
+//        socialCircleAvatar("assets/icons/icngmail.png",(){}),
+//      ],
+//    );
+//  }
 
   GestureDetector socialCircleAvatar(String assetIcon,VoidCallback onTap) {
     return GestureDetector(
@@ -207,17 +214,18 @@ class _LoginPageState extends State<LoginPage> {
                       padding: EdgeInsets.only(right: size.getWidthPx(24)),
                       child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text("Forgot Password?",
+                          child: Text("Forgot Password?\n",
                               style: TextStyle(fontFamily: 'Exo2',fontSize: 16.0))),
                     )),
                 SizedBox(height: size.getWidthPx(8)),
                 _loginButtonWidget(),
                 SizedBox(height: size.getWidthPx(28)),
 
-                Text("Or Login with", style: TextStyle(fontFamily: 'Exo2',fontSize: 16.0, color: Colors.grey),
+                Text("", style: TextStyle(
+                    fontFamily: 'Exo2', fontSize: 16.0, color: Colors.grey),
                 ),
                 SizedBox(height: size.getWidthPx(12)),
-                _socialButtons()
+                //_socialButtons()
 
               ],
             )),
@@ -231,7 +239,8 @@ class _LoginPageState extends State<LoginPage> {
       try {
         AuthResult user = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: _email, password: _password);
-        Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
       }catch(e){
 
         print(e.message);
