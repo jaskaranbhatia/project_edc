@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
             final fresh = Record.fromSnapshot(freshSnapshot);
 
             await transaction
-                .update(record.reference, {'votes': fresh.votes + 1});
+                .update(record.reference, {'votes': fresh.votes});
           }),
         ),
       ),
@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class Record {
   final String name;
-  final int votes;
+  final String votes;
   final DocumentReference reference;
 
   Record.fromMap(Map<String, dynamic> map, {this.reference})
