@@ -4,6 +4,7 @@ import 'package:flutter_ui_collections/utils/utils.dart';
 import 'package:flutter_ui_collections/widgets/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'page_home.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_ui_collections/Teacher-page.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -225,6 +226,10 @@ class _SignUpPageState extends State<SignUpPage> {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => teacherPage()));
       } catch (e) {
+        Fluttertoast.showToast(msg: "Wrong Login Credentials",
+            toastLength: Toast.LENGTH_LONG,
+            backgroundColor: Colors.black87,
+            textColor: Colors.white);
         print(e.message);
       }
     }

@@ -20,18 +20,20 @@ class _teacherPageState extends State<teacherPage> {
   var citiesList = [
     "COE 21-24",
     "COE 5-8",
+
   ];
 
   @override
   Widget build(BuildContext context) {
-    size = Screen(MediaQuery.of(context).size);
+    size = Screen(MediaQuery
+        .of(context)
+        .size);
 
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
-        title: Text("Present Sir!", style: TextStyle(color: Colors.white)),
-        backgroundColor: Color.fromRGBO(97, 10, 165, 0.6),
-      ),
+        title: Text("Present", style: TextStyle(color: Colors.white)),
+        backgroundColor: Color.fromRGBO(97, 10, 165, 0.6),),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical
@@ -41,14 +43,12 @@ class _teacherPageState extends State<teacherPage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Center(
-                child: Text(
-                  'Present Sir!!',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w700),
-                ),
+              child: Center(child: Text('Present', style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w700
+              ),
+              ),
               ),
               decoration: BoxDecoration(
                 color: Color.fromRGBO(97, 10, 165, 0.6),
@@ -57,7 +57,9 @@ class _teacherPageState extends State<teacherPage> {
             ListTile(
               leading: Icon(Icons.calendar_today),
               title: Text('Timetable'),
-              onTap: () {},
+              onTap: () {
+
+              },
             ),
             ListTile(
               leading: Icon(Icons.settings),
@@ -93,25 +95,23 @@ class _teacherPageState extends State<teacherPage> {
                 SizedBox(
                   height: 8.0,
                 ),
-                RaisedButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Firebase()));
-                    print("Hello");
-                  },
-                  elevation: 8.0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)),
-                  padding: EdgeInsets.all(size.getWidthPx(12)),
-                  child: Text(
-                    "Show Time Table",
-                    style: TextStyle(
-                        fontFamily: 'Exo2',
-                        color: Colors.white,
-                        fontSize: 15.0),
-                  ),
-                  color: Color.fromRGBO(97, 10, 165, 0.8),
-                )
+//                RaisedButton(
+//                  onPressed: () {
+//                    Navigator.push(context,
+//                        MaterialPageRoute(builder: (context) => Firebase()));
+//                    print("Hello");
+//                  },
+//                  elevation: 8.0,
+//                  shape: RoundedRectangleBorder(
+//                      borderRadius: new BorderRadius.circular(30.0)),
+//                  padding: EdgeInsets.all(size.getWidthPx(12)),
+//                  child: Text(
+//                    "Show Time Table",
+//                    style: TextStyle(
+//                        fontFamily: 'Exo2', color: Colors.white, fontSize: 15.0),
+//                  ),
+//                  color: Color.fromRGBO(97, 10, 165, 0.8),
+//                )
               ],
             ),
           ),
@@ -176,7 +176,7 @@ class _teacherPageState extends State<teacherPage> {
   }
 
   Text titleWidget() {
-    return Text("\nWelcome, Mr.Vijay\nManage Student attendance",
+    return Text("\nWelcome, \nManage Student attendance",
         style: TextStyle(
             fontFamily: 'Exo2',
             fontSize: 24.0,
@@ -198,8 +198,7 @@ class _teacherPageState extends State<teacherPage> {
                 _searchWidget(),
                 RaisedButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
+                    Navigator.push(context,
                         MaterialPageRoute(
                             builder: (context) => takeAttendance()));
                     print("Hello");
@@ -224,23 +223,22 @@ class _teacherPageState extends State<teacherPage> {
                     fontSize: 16.0),
                 HorizontalList(
                   children: <Widget>[
-                    for (int i = 0; i < citiesList.length; i++)
+                    for(int i = 0; i < citiesList.length; i++)
                       buildChoiceChip(i, citiesList[i])
                   ],
                 ),
               ],
-            )));
+            )
+        ));
   }
 
+
   Widget _searchWidget() {
-    return Container(
-        child: Center(
-            child: Text(
-      "\nComputer Networks(UCS065)",
+    return Container(child: Center(child: Text("\nOperating Systems",
       style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-      textAlign: TextAlign.center,
-    )));
+      textAlign: TextAlign.center,)));
   }
+
 
   Padding leftAlignText({text, leftPadding, textColor, fontSize, fontWeight}) {
     return Padding(
@@ -257,6 +255,7 @@ class _teacherPageState extends State<teacherPage> {
       ),
     );
   }
+
 
 //  Card propertyCard(Property property) {
 //    return Card(
@@ -307,7 +306,7 @@ class _teacherPageState extends State<teacherPage> {
         labelStyle: TextStyle(
             fontFamily: 'Exo2',
             color:
-                (_selectedIndex == index) ? backgroundColor : textPrimaryColor),
+            (_selectedIndex == index) ? backgroundColor : textPrimaryColor),
         elevation: 4.0,
         padding: EdgeInsets.symmetric(
             vertical: size.getWidthPx(4), horizontal: size.getWidthPx(12)),
@@ -320,7 +319,10 @@ class _teacherPageState extends State<teacherPage> {
             });
           }
         },
+
       ),
+
     );
   }
+
 }

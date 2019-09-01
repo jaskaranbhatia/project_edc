@@ -23,9 +23,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Baby Name Votes')),
-      body: _buildBody(context),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(leading: Icon(Icons.arrow_back_ios),
+            title: Text('Your Time Table'),
+            backgroundColor: Color.fromRGBO(97, 10, 165, 0.8)),
+        body: _buildBody(context),
+      ),
     );
   }
 
@@ -60,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         child: ListTile(
           title: Text(record.name),
-          trailing: Text(record.votes.toString()),
+          trailing: Text("Start Time : " + record.votes.toString()),
           onTap: () => Firestore.instance.runTransaction((transaction) async {
             final freshSnapshot = await transaction.get(record.reference);
             final fresh = Record.fromSnapshot(freshSnapshot);

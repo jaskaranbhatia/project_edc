@@ -6,7 +6,7 @@ import 'package:flutter_ui_collections/utils/utils.dart';
 import 'package:flutter_ui_collections/widgets/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 import 'page_forgotpass.dart';
 import 'page_home.dart';
 import 'page_signup.dart';
@@ -14,7 +14,7 @@ import 'page_search.dart';
 
 class LoginPage extends StatefulWidget {
 
- 
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -249,7 +249,10 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => HomePage()));
       }catch(e){
-
+        Fluttertoast.showToast(msg: "Wrong Login Credentials",
+            toastLength: Toast.LENGTH_LONG,
+            backgroundColor: Colors.black87,
+            textColor: Colors.white);
         print(e.message);
       }
 

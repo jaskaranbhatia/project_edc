@@ -148,19 +148,38 @@ class _SearchPageState extends State<SearchPage> {
 //
 //              ],
 //            )
+            RaisedButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Firebase()));
+                print("Hello");
+              },
+              elevation: 8.0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(30.0)),
+              padding: EdgeInsets.all(size.getWidthPx(12)),
+              child: Text(
+                "Show Time Table",
+                style: TextStyle(
+                    fontFamily: 'Exo2', color: Colors.white, fontSize: 15.0),
+              ),
+              color: Color.fromRGBO(97, 10, 165, 0.8),
+            )
           ],
         ),
       ],
     );
   }
 
-  Text titleWidget() {
-    return Text("\nWelcome, Gurman Bhullar\nManage your attendance",
-        style: TextStyle(
-            fontFamily: 'Exo2',
-            fontSize: 24.0,
-            fontWeight: FontWeight.w900,
-            color: Colors.white));
+  Center titleWidget() {
+    return Center(
+      child: Text("\t\nWelcome, Student\nManage your attendance",
+          style: TextStyle(
+              fontFamily: 'Exo2',
+              fontSize: 24.0,
+              fontWeight: FontWeight.w900,
+              color: Colors.white)),
+    );
   }
 
   Card upperBoxCard() {

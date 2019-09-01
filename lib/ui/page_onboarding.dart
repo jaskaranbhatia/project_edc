@@ -17,11 +17,14 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   final _controller = PageController();
   bool leadingVisibility = false;
   Screen  size;
-  
+
   final List<Widget> _pages = [
-    IntroPage("assets/onboard_1.png","Activity", "View activity collected by your fitness trackers and your other mobile apps! \n \n Data has never been more beautiful or easier to understand!"),
-    IntroPage("assets/onboard_2.png","PhotoFIT", "A new kind of fittness tracking! \n \n 100% free, because great heath should be accessible to all!"),
-    IntroPage("assets/onboard_3.png","PhotoLAPSE", "Your progress photos are being put to good use! \n \n The photoLAPSE feature allows you to view your result over custom time periods!"),
+    IntroPage("assets/onboard_1.png", "Welcome to Present!",
+        "A one stop application for managing all your attendance records."),
+    IntroPage("assets/onboard_3.png", "One touch attendance",
+        "Marking your attendace was never easier. \n \n No more wasting time on manual attendance."),
+    IntroPage("assets/onboard_2.png", "Simplistic User Interface",
+        "Manage and Navigate through profile without any complexities! "),
   ];
   int currentPageIndex = 0;
 
