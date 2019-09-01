@@ -2,40 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_ui_collections/model/models.dart';
 import 'package:flutter_ui_collections/utils/utils.dart';
-import './page_login.dart';
 import 'package:flutter_ui_collections/widgets/widgets.dart';
 import 'package:flutter_ui_collections/firebase.dart';
-import 'package:flutter_ui_collections/attdn.dart';
+import './ui/page_login.dart';
+import 'package:flutter_ui_collections/takeAttd.dart';
 
-class SearchPage extends StatefulWidget {
+class teacherPage extends StatefulWidget {
   @override
-  _SearchPageState createState() => _SearchPageState();
+  _teacherPageState createState() => _teacherPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _teacherPageState extends State<teacherPage> {
   Screen size;
   int _selectedIndex = 0;
   List<Property> premiumList = List();
   List<Property> featuredList = List();
   var citiesList = [
-    "Operating System",
-    "DMS",
-    "Numerical Analysis",
-    "Mathematics",
-    "Material Science",
+    "COE 21-24",
+    "COE 5-8",
   ];
 
   @override
   Widget build(BuildContext context) {
-    size = Screen(MediaQuery
-        .of(context)
-        .size);
+    size = Screen(MediaQuery.of(context).size);
 
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
-        title: Text("Present Sir", style: TextStyle(color: Colors.white)),
-        backgroundColor: Color.fromRGBO(97, 10, 165, 0.6),),
+        title: Text("Present Sir!", style: TextStyle(color: Colors.white)),
+        backgroundColor: Color.fromRGBO(97, 10, 165, 0.6),
+      ),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical
@@ -45,12 +41,14 @@ class _SearchPageState extends State<SearchPage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Center(child: Text('Present Sir!!', style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.w700
-              ),
-              ),
+              child: Center(
+                child: Text(
+                  'Present Sir!!',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w700),
+                ),
               ),
               decoration: BoxDecoration(
                 color: Color.fromRGBO(97, 10, 165, 0.6),
@@ -59,9 +57,7 @@ class _SearchPageState extends State<SearchPage> {
             ListTile(
               leading: Icon(Icons.calendar_today),
               title: Text('Timetable'),
-              onTap: () {
-
-              },
+              onTap: () {},
             ),
             ListTile(
               leading: Icon(Icons.settings),
@@ -92,13 +88,38 @@ class _SearchPageState extends State<SearchPage> {
         child: Container(
           child: SingleChildScrollView(
             child: Column(
-              children: <Widget>[upperPart()],
+              children: <Widget>[
+                upperPart(),
+                SizedBox(
+                  height: 8.0,
+                ),
+                RaisedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Firebase()));
+                    print("Hello");
+                  },
+                  elevation: 8.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0)),
+                  padding: EdgeInsets.all(size.getWidthPx(12)),
+                  child: Text(
+                    "Show Time Table",
+                    style: TextStyle(
+                        fontFamily: 'Exo2',
+                        color: Colors.white,
+                        fontSize: 15.0),
+                  ),
+                  color: Color.fromRGBO(97, 10, 165, 0.8),
+                )
+              ],
             ),
           ),
         ),
       ),
     );
   }
+
   Widget upperPart() {
     return Stack(
       children: <Widget>[
@@ -155,7 +176,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Text titleWidget() {
-    return Text("\nWelcome, Gurman Bhullar\nManage your attendance",
+    return Text("\nWelcome, Mr.Vijay\nManage Student attendance",
         style: TextStyle(
             fontFamily: 'Exo2',
             fontSize: 24.0,
@@ -171,52 +192,55 @@ class _SearchPageState extends State<SearchPage> {
             horizontal: size.getWidthPx(20), vertical: size.getWidthPx(16)),
         borderOnForeground: true,
         child: Container(
-          height: size.getWidthPx(150),
-          child: Column(
-            children: <Widget>[
-              _searchWidget(),
-              RaisedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(
-                          builder: (context) => markAttendance()));
-                  print("Hello");
-                },
-                elevation: 8.0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30.0)),
-                padding: EdgeInsets.all(size.getWidthPx(6)),
-                child: Text(
-                  "Mark Attendance",
-                  style: TextStyle(
-                      fontFamily: 'Exo2', color: Colors.white, fontSize: 15.0),
+            height: size.getWidthPx(150),
+            child: Column(
+              children: <Widget>[
+                _searchWidget(),
+                RaisedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => takeAttendance()));
+                    print("Hello");
+                  },
+                  elevation: 8.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0)),
+                  padding: EdgeInsets.all(size.getWidthPx(6)),
+                  child: Text(
+                    "Take Attendance",
+                    style: TextStyle(
+                        fontFamily: 'Exo2',
+                        color: Colors.white,
+                        fontSize: 15.0),
+                  ),
+                  color: Color.fromRGBO(97, 10, 165, 0.8),
                 ),
-                color: Color.fromRGBO(97, 10, 165, 0.8),
-              ),
-              leftAlignText(
-                  text: "Upcoming Classes :",
-                  leftPadding: size.getWidthPx(16),
-                  textColor: textPrimaryColor,
-                  fontSize: 16.0),
-              HorizontalList(
-                children: <Widget>[
-                  for(int i = 0; i < citiesList.length; i++)
-                    buildChoiceChip(i, citiesList[i])
-                ],
-              ),
-            ],
-          )
-        ));
-
+                leftAlignText(
+                    text: "Upcoming Classes :",
+                    leftPadding: size.getWidthPx(16),
+                    textColor: textPrimaryColor,
+                    fontSize: 16.0),
+                HorizontalList(
+                  children: <Widget>[
+                    for (int i = 0; i < citiesList.length; i++)
+                      buildChoiceChip(i, citiesList[i])
+                  ],
+                ),
+              ],
+            )));
   }
-
 
   Widget _searchWidget() {
-    return Container(child: Center(child: Text("\nComputer Networks(UCS065)",
+    return Container(
+        child: Center(
+            child: Text(
+      "\nComputer Networks(UCS065)",
       style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-      textAlign: TextAlign.center,)));
+      textAlign: TextAlign.center,
+    )));
   }
-
 
   Padding leftAlignText({text, leftPadding, textColor, fontSize, fontWeight}) {
     return Padding(
@@ -233,7 +257,6 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
-
 
 //  Card propertyCard(Property property) {
 //    return Card(
@@ -284,7 +307,7 @@ class _SearchPageState extends State<SearchPage> {
         labelStyle: TextStyle(
             fontFamily: 'Exo2',
             color:
-            (_selectedIndex == index) ? backgroundColor : textPrimaryColor),
+                (_selectedIndex == index) ? backgroundColor : textPrimaryColor),
         elevation: 4.0,
         padding: EdgeInsets.symmetric(
             vertical: size.getWidthPx(4), horizontal: size.getWidthPx(12)),
@@ -297,10 +320,7 @@ class _SearchPageState extends State<SearchPage> {
             });
           }
         },
-
       ),
-
     );
   }
-
 }

@@ -2,6 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ui_collections/utils/utils.dart';
 import 'package:flutter_ui_collections/widgets/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'page_home.dart';
+import 'package:flutter_ui_collections/Teacher-page.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -9,14 +12,14 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  TextEditingController _nameController =  TextEditingController();
-  TextEditingController _emailController =  TextEditingController();
-  TextEditingController _passwordController =  TextEditingController();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
-  FocusNode _nameFocusNode =  FocusNode();
-  FocusNode _emailFocusNode =  FocusNode();
-  FocusNode _passFocusNode =  FocusNode();
-  FocusNode _confirmPassFocusNode =  FocusNode();
+  FocusNode _nameFocusNode = FocusNode();
+  FocusNode _emailFocusNode = FocusNode();
+  FocusNode _passFocusNode = FocusNode();
+  FocusNode _confirmPassFocusNode = FocusNode();
   String _name, _email, _password, _confirmPassword;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -24,46 +27,49 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    size = Screen(MediaQuery.of(context).size);
+    size = Screen(MediaQuery
+        .of(context)
+        .size);
 
     return Scaffold(
         backgroundColor: backgroundColor,
         resizeToAvoidBottomInset: true,
         body: Stack(children: <Widget>[
-        ClipPath(
-        clipper: BottomShapeClipper(),
-        child: Container(
-          color: colorCurve,
-        )),
+          ClipPath(
+              clipper: BottomShapeClipper(),
+              child: Container(
+                color: colorCurve,
+              )),
           SingleChildScrollView(
-        child: SafeArea(
-          top: true,
-          bottom: false,
-          child: Container(
-            margin: EdgeInsets.symmetric(
-                horizontal: size.getWidthPx(20), vertical: size.getWidthPx(20)),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
+            child: SafeArea(
+              top: true,
+              bottom: false,
+              child: Container(
+                margin: EdgeInsets.symmetric(
+                    horizontal: size.getWidthPx(20),
+                    vertical: size.getWidthPx(20)),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      IconButton(
-                        icon: Icon(Icons.arrow_back,color: colorCurve,),
-                        onPressed: () => Navigator.pop(context, false),
+                      Row(
+                        children: <Widget>[
+                          IconButton(
+                            icon: Icon(Icons.arrow_back, color: colorCurve,),
+                            onPressed: () => Navigator.pop(context, false),
+                          ),
+                          SizedBox(width: size.getWidthPx(10)),
+                          _signUpGradientText(),
+                        ],
                       ),
-                      SizedBox(width: size.getWidthPx(10)),
-                      _signUpGradientText(),
-                    ],
-                  ),
-                  SizedBox(height: size.getWidthPx(10)),
+                      SizedBox(height: size.getWidthPx(10)),
 
-                  SizedBox(height: size.getWidthPx(30)),
-                  registerFields()
-                ]),
-          ),
-        ),
-      )
-    ]));
+                      SizedBox(height: size.getWidthPx(30)),
+                      registerFields()
+                    ]),
+              ),
+            ),
+          )
+        ]));
   }
 
 //  RichText _textAccount() {
@@ -88,7 +94,8 @@ class _SignUpPageState extends State<SignUpPage> {
           Color.fromRGBO(97, 6, 165, 1.0),
           Color.fromRGBO(45, 160, 240, 1.0)
         ]),
-        style: TextStyle(fontFamily: 'Exo2',fontSize: 36, fontWeight: FontWeight.bold));
+        style: TextStyle(
+            fontFamily: 'Exo2', fontSize: 36, fontWeight: FontWeight.bold));
   }
 
 //  BoxField _nameWidget() {
@@ -162,14 +169,16 @@ class _SignUpPageState extends State<SignUpPage> {
       child: RaisedButton(
         elevation: 8.0,
         shape: RoundedRectangleBorder(
-            borderRadius:  BorderRadius.circular(30.0)),
+            borderRadius: BorderRadius.circular(30.0)),
         padding: EdgeInsets.all(size.getWidthPx(12)),
         child: Text(
           "LOGIN",
-          style: TextStyle(fontFamily: 'Exo2',color: Colors.white, fontSize: 20.0),
+          style: TextStyle(
+              fontFamily: 'Exo2', color: Colors.white, fontSize: 20.0),
         ),
         color: colorCurve,
         onPressed: () {
+          signIn();
           // Going to DashBoard
         },
       ),
@@ -187,7 +196,8 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  registerFields() => Container(
+  registerFields() =>
+      Container(
         child: Form(
             key: _formKey,
             child: Column(
@@ -203,4 +213,20 @@ class _SignUpPageState extends State<SignUpPage> {
               ],
             )),
       );
+
+
+  Future<void> signIn() async {
+    final formState = _formKey.currentState;
+    if (formState.validate()) {
+      formState.save();
+      try {
+        AuthResult user = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: _email, password: _password);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => teacherPage()));
+      } catch (e) {
+        print(e.message);
+      }
+    }
+  }
 }

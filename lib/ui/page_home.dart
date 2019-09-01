@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ui_collections/widgets/bottom_navigationBar.dart';
-
+import 'dart:math';
 import '../main.dart';
 import 'page_coming_soon.dart';
 import 'page_login.dart';

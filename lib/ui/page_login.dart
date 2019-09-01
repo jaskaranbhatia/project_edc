@@ -1,16 +1,20 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import './page_search.dart';
+import 'package:flutter_ui_collections/attdn.dart';
 import 'package:flutter_ui_collections/utils/utils.dart';
 import 'package:flutter_ui_collections/widgets/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'page_forgotpass.dart';
 import 'page_home.dart';
 import 'page_signup.dart';
+import 'page_search.dart';
 
 class LoginPage extends StatefulWidget {
+
+ 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -113,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
     return BoxField(
         controller: _emailController,
         focusNode: _emailFocusNode,
-        hintText: "Enter Roll No",
+        hintText: "Enter Email ID",
         lableText: "Email",
         obscureText: false,
         onSaved: (String val) {
@@ -122,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
         onFieldSubmitted: (String value) {
           FocusScope.of(context).requestFocus(_passFocusNode);
         },
-        icon: Icons.person,
+        icon: Icons.mail,
         iconColor: colorCurve);
   }
 
@@ -157,8 +161,7 @@ class _LoginPageState extends State<LoginPage> {
         color: colorCurve,
         onPressed: () {
           signIn();
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomePage()));
+          //Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
           // Going to DashBoard
 
         },
@@ -233,12 +236,16 @@ class _LoginPageState extends State<LoginPage> {
 
 
   Future<void> signIn() async{
-    final formState = _Formkey.currentState;
+    final formState = _formKey.currentState;
     if(formState.validate()){
       formState.save();
       try {
         AuthResult user = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: _email, password: _password);
+        Firestore.instance.collection('users').document(_email).setData(
+            {'Name': _email, 'Subject': '',});
+
+
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => HomePage()));
       }catch(e){
